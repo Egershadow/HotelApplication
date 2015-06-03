@@ -12,7 +12,7 @@ using System.Collections.ObjectModel;
 
 namespace HotelClient.ViewModel
 {
-    public abstract class EntitiesViewModel<EntityType, ViewCreateUpdateType> : ViewModelBase
+    public class EntitiesViewModel<EntityType, ViewCreateUpdateType> : ViewModelBase
         where EntityType : BaseEntity
         where ViewCreateUpdateType : Window, new()
     {
@@ -29,6 +29,9 @@ namespace HotelClient.ViewModel
         private ViewCreateUpdateType creatorWindow;
         private EntitiesModel<EntityType> entities;
         private EntityType selectedItem;
+        protected String entityAddress = "";
+
+
         public EntityType SelectedItem
         {
             get { return selectedItem; }
@@ -145,10 +148,14 @@ namespace HotelClient.ViewModel
 
         public void deleteEntity(object obj)
         {
-            entities.DeleteEntity((EntityType)obj);
+            entities.DeleteEntity((EntityType)obj, entityAddress);
         }
 
-        public abstract void updateEntityList(object obj);
+        public void updateEntityList(object obj)
+        {
+            //TODO: set gotten list to EntitiesModel
+            //entities = entities.GetAllEntities(entityAddress);
+        }
 
     }
 }
