@@ -13,6 +13,18 @@ namespace HotelClient.ViewModel
         public GuestViewModel()
         {
             entityAddress = "api/guest";
+
+            Guest guest = new Guest();
+            guest.Id = 1;
+            guest.Age = 20;
+            guest.GuestName = "Vadim";
+            Entities.Add(guest);
+
+            Guest guest1 = new Guest();
+            guest1.Id = 2;
+            guest1.Age = 22;
+            guest1.GuestName = "Superman";
+            Entities.Add(guest1);
         }
     }
 }

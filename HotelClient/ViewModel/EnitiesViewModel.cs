@@ -9,6 +9,7 @@ using HotelClient.Model;
 using Entity;
 using System.Windows;
 using System.Collections.ObjectModel;
+using System.Windows.Data;
 
 namespace HotelClient.ViewModel
 {
@@ -118,9 +119,11 @@ namespace HotelClient.ViewModel
             //    property.SetValue(obj, entityProperty.GetValue(entity, null));
             //}
 
+
             creatorWindow = null;
             entities = new EntitiesModel<EntityType>();
             updateEntityList(new Object());
+
             showCreateEntityCommand = new RelayCommand(showCreateWindow, param => this.canShowCreateEntityCommand);
             showUpdateEntityCommand = new RelayCommand(showUpdateWindow, param => this.canShowUpdateEntityCommand);
             deleteEntityCommand = new RelayCommand(deleteEntity, param => this.canDeleteEntityCommand);
