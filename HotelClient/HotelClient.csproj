@@ -57,21 +57,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\EntitiesModel.cs" />
-    <Compile Include="ViewModel\EntityModel.cs" />
+    <Compile Include="ViewModel\EntityViewModel.cs" />
     <Compile Include="ViewModel\GuestViewModel.cs" />
+    <Compile Include="ViewModel\GuestsViewModel.cs" />
     <Compile Include="View\CreateUpdateGuestWindow.xaml.cs">
       <DependentUpon>CreateUpdateGuestWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\GuestWindow.xaml.cs">
-      <DependentUpon>GuestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\EnitiesViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="View\CreateUpdateGuestWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\GuestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

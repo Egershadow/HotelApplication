@@ -62,7 +62,7 @@ namespace HotelClient.Model
             client.DefaultRequestHeaders.Accept.Add(
                new MediaTypeWithQualityHeaderValue("application/json"));
 
-            String resultAddress = address + "/" + entity.Id;
+            String resultAddress = address;
             var response = client.PutAsJsonAsync(resultAddress, entity).Result;//api/employee
 
             if (response.IsSuccessStatusCode)

@@ -29,19 +29,19 @@
                             Command="{Binding DeleteEntityCommand}">
                             </Button>
                             <Button x:Name="buttonUpdateGuest"
-                            Content="Delete Guest"
+                            Content="Update Guest"
                             Command="{Binding ShowUpdateEntityCommand}">
                             </Button>
                         </StackPanel>
                     </Grid>
 
 
-                    <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Entites}"
-                        AutoGenerateColumns="False">
+                    <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Entities}"
+                        AutoGenerateColumns="False" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id"  Binding="{Binding Id}"/>
                             <DataGridTextColumn Header="GuestName" Binding="{Binding GuestName}" />
-                            <DataGridTextColumn Header="GuestAge" Binding="{Binding GuestAge}" />
+                            <DataGridTextColumn Header="Age" Binding="{Binding Age}" />
                         </DataGrid.Columns>
                     </DataGrid>
 

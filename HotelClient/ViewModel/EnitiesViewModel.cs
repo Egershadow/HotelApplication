@@ -10,23 +10,22 @@ using Entity;
 using System.Windows;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
+using System.Reflection;
 
 namespace HotelClient.ViewModel
 {
-    public class EntitiesViewModel<EntityType, ViewCreateUpdateType> : ViewModelBase
+    public class EntitiesViewModel<EntityType, ViewCreateUpdateType, EntityModelType> : ViewModelBase
         where EntityType : BaseEntity
         where ViewCreateUpdateType : Window, new()
+        where EntityModelType : EntityViewModel <EntityType>,new()
     {
         private ICommand showCreateEntityCommand;
         private ICommand deleteEntityCommand;
         private ICommand showUpdateEntityCommand;
         private ICommand updateEntityListCommand;
 
-        private bool canShowCreateEntityCommand = true;
-        private bool canShowUpdateEntityCommand = false;
-        private bool canDeleteEntityCommand = false;
         private bool canUpdateEntityListCommand = true;
-        private GuestWindow guestWindow;
+        //private GuestWindow guestWindow;
         private ViewCreateUpdateType creatorWindow;
         private EntitiesModel<EntityType> entities;
         private EntityType selectedItem;
@@ -35,7 +34,10 @@ namespace HotelClient.ViewModel
 
         public EntityType SelectedItem
         {
-            get { return selectedItem; }
+            get 
+            { 
+                return selectedItem; 
+            }
             set
             {
                 selectedItem = value;
@@ -122,42 +124,108 @@ namespace HotelClient.ViewModel
 
             creatorWindow = null;
             entities = new EntitiesModel<EntityType>();
-            updateEntityList(new Object());
+            //updateEntityList(new Object());
 
-            showCreateEntityCommand = new RelayCommand(showCreateWindow, param => this.canShowCreateEntityCommand);
-            showUpdateEntityCommand = new RelayCommand(showUpdateWindow, param => this.canShowUpdateEntityCommand);
-            deleteEntityCommand = new RelayCommand(deleteEntity, param => this.canDeleteEntityCommand);
+            showCreateEntityCommand = new RelayCommand(showCreateUpdateWindow, param => this.canShowCreateWindow());
+            showUpdateEntityCommand = new RelayCommand(showCreateUpdateWindow, param => this.canShowUpdateWindow());
+            deleteEntityCommand = new RelayCommand(deleteEntity, param => this.canExecuteDelete());
             updateEntityListCommand = new RelayCommand(updateEntityList, param => this.canUpdateEntityListCommand);
 
         }
 
-        public void showCreateWindow(object obj) 
+        public void showCreateUpdateWindow(object obj) 
         {
             creatorWindow = new ViewCreateUpdateType();
-            creatorWindow.DataContext = this;
-            creatorWindow.Show();
+            EntityModelType entityViewModel;
+            ConstructorInfo ctor = null;
+            ConstructorInfo[] constructorInfos = typeof(EntityModelType).GetConstructors();
+            for(int i = 0; i < constructorInfos.Length;++i ) 
+            {
+                ParameterInfo[] constructorParams = constructorInfos[i].GetParameters();
+                if (constructorParams.Length == 0) 
+                {
+                    continue;
+                }
+                else
+                {
+                    if (constructorParams[0].ParameterType.Name.Equals("Guest") && constructorParams.Length == 1)
+                    {
+                        ctor = constructorInfos[i];
+                        break;
+                    }
+                }
+            }
+            if(ctor == null) {
+                return;
+            } 
+            //= new EntityModelType(selectedItem);
+            entityViewModel = (EntityModelType)ctor.Invoke(new object[] { selectedItem });
+            entityViewModel.View = creatorWindow;
+            creatorWindow.DataContext = entityViewModel;
+            creatorWindow.ShowDialog();
+            updateEntityList(null);
+            
             //guestWindow = new GuestWindow();
             //guestWindow.Show();
+            
         }
 
-        public void showUpdateWindow(object obj)
-        {
-            creatorWindow = new ViewCreateUpdateType();
-            creatorWindow.DataContext = this;
-            creatorWindow.Show();
-            //guestWindow = new GuestWindow();
-            //guestWindow.Show();
-        }
+        //public void showUpdateWindow(object obj)
+        //{
+        //    creatorWindow = new ViewCreateUpdateType();
+        //    EntityModelType entityModel = new EntityModelType();
+        //    creatorWindow.DataContext = entityModel;
+        //    creatorWindow.Show();
+        //    //guestWindow = new GuestWindow();
+        //    //guestWindow.Show();
+        //}
 
         public void deleteEntity(object obj)
         {
-            entities.DeleteEntity((EntityType)obj, entityAddress);
+            entities.DeleteEntity((EntityType)SelectedItem, entityAddress);
+            updateEntityList(null);
         }
 
         public void updateEntityList(object obj)
         {
+            Entities.Clear();
+            EntitiesModel<EntityType> eM = new EntitiesModel<EntityType>();
+            var rawEntities = new ObservableCollection<EntityType>(eM.GetAllEntities(entityAddress));
+            foreach (EntityType rawEntity in rawEntities)
+            {
+                Entities.Add(rawEntity);
+            }
             //TODO: set gotten list to EntitiesModel
             //entities = entities.GetAllEntities(entityAddress);
+        }
+
+        public bool canShowCreateWindow()
+        {
+            return true;
+        }
+
+        public bool canShowUpdateWindow()
+        {
+            if (selectedItem == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool canExecuteDelete()
+        {
+            if (selectedItem == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
     }

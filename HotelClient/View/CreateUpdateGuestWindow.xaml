@@ -22,17 +22,21 @@
         <Label Content="GuestAge" Grid.Row="2" Grid.RowSpan="2" Height="28" 
        HorizontalAlignment="Left"
        Name="label3" VerticalAlignment="Top" />
+        
         <TextBox Grid.Column="1" Grid.RowSpan="2" Height="23" HorizontalAlignment="Left" 
        Margin="20,5,0,0" Name="IdTextBox" VerticalAlignment="Top" 
-       Width="120" Text="{Binding Path=LastName}" />
+       Width="120" Text="{Binding Path=Entity.Id, Mode=TwoWay}" IsEnabled="False"/>
+        
         <TextBox Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Height="23" 
        HorizontalAlignment="Left" Margin="20,5,0,0" Name="GuestNameTextBox" 
-       VerticalAlignment="Top" Width="120" Text="{Binding Path=FirstName}" />
+       VerticalAlignment="Top" Width="120" Text="{Binding Path=Entity.GuestName, Mode=TwoWay}" />
+        
         <TextBox Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Height="23" 
        HorizontalAlignment="Left" Margin="20,5,0,0" Name="GuestAgeTextBox" 
-       VerticalAlignment="Top" Width="120" Text="{Binding Path=Address}" />
-        <Button Content="Save" Grid.Column="1" Grid.Row="4" Height="23" 
-       HorizontalAlignment="Left" Margin="20,10,0,0" Name="button1" 
-       VerticalAlignment="Top" Width="75" />
+       VerticalAlignment="Top" Width="120" Text="{Binding Path=Entity.Age, Mode=TwoWay}" />
+
+        <Button Content="{Binding ButtonName}" Grid.Column="1" Grid.Row="4" Height="23" 
+       HorizontalAlignment="Left" Margin="20,10,0,0" Name="createUpdateGuestButton" 
+       VerticalAlignment="Top" Width="75" Command="{Binding CreateOrUpdateEntity}"/>
     </Grid>
 </Window>

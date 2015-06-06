@@ -14,9 +14,7 @@ C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClien
 C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\HotelClient.csproj.GenerateResource.Cache
 C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\HotelClient.exe
 C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\HotelClient.pdb
-C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\GuestWindow.baml
 C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\MainWindow.baml
-C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\GuestWindow.g.cs
 C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\MainWindow.g.cs
 C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\CreateUpdateGuestWindow.baml
 C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\CreateUpdateGuestWindow.g.cs

@@ -1,30 +1,42 @@
-﻿using System;
+﻿using Entity.Entity;
+using HotelClient.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entity.Entity;
-using HotelClient.View;
 
 namespace HotelClient.ViewModel
 {
-    public class GuestViewModel : EntitiesViewModel<Guest, CreateUpdateGuestWindow>
+    public class GuestViewModel : EntityViewModel<Guest>
     {
         public GuestViewModel()
+            : base(new Guest())
         {
-            entityAddress = "api/guest";
 
-            Guest guest = new Guest();
-            guest.Id = 1;
-            guest.Age = 20;
-            guest.GuestName = "Vadim";
-            Entities.Add(guest);
+        }
+        public GuestViewModel(Guest guest)
+            : base(guest)
+        {
+        }
+        public override void createEntity(object obj) 
+        {
+            EntitiesModel<Guest> model = new EntitiesModel<Guest>();
+            model.AddEntity(Entity, "api/guest");
+        }
+        public override void updateEntity(object obj)
+        {
+            EntitiesModel<Guest> model = new EntitiesModel<Guest>();
+            model.UpdateEntity(Entity, "api/guest" + "/" + Entity.Id);
+        }
 
-            Guest guest1 = new Guest();
-            guest1.Id = 2;
-            guest1.Age = 22;
-            guest1.GuestName = "Superman";
-            Entities.Add(guest1);
+        public override bool canExecuteCreate()
+        {
+            return true;
+        }
+        public override bool canExecuteUpdate()
+        {
+            return true;
         }
     }
 }
