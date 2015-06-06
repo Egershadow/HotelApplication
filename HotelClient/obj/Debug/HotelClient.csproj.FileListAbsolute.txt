@@ -20,3 +20,9 @@ C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClien
 C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\CreateUpdateGuestWindow.g.cs
 C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\bin\Debug\Entity.dll
 C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\bin\Debug\Entity.pdb
+C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\CreateUpdateHotelWindow.baml
+C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\CreateUpdateHotelWindow.g.cs
+C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\CreateUpdateRoomWindow.baml
+C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\CreateUpdateRoomWindow.g.cs
+C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\CreateUpdateHotelJournalWindow.baml
+C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\obj\Debug\View\CreateUpdateHotelJournalWindow.g.cs

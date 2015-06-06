@@ -11,5 +11,10 @@ namespace Entity.Entity
         public virtual string HotelName { get; set; }
         public virtual string HotelCity { get; set; }
         public virtual IList<Room> Rooms { get; set; }
+
+        public override string ToString()
+        {
+            return HotelName;
+        }
     }
 }

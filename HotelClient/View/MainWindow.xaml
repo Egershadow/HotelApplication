@@ -1,7 +1,7 @@
 ﻿<Window x:Class="HotelClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="HotelApplication" Height="350" Width="525">
     <Window.Resources>
         <CollectionViewSource x:Key="ItemCollectionViewSource" CollectionViewType="ListCollectionView"/>
     </Window.Resources>
@@ -37,29 +37,134 @@
 
 
                     <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Entities}"
-                        AutoGenerateColumns="False" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}">
+                        AutoGenerateColumns="False" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id"  Binding="{Binding Id}"/>
                             <DataGridTextColumn Header="GuestName" Binding="{Binding GuestName}" />
                             <DataGridTextColumn Header="Age" Binding="{Binding Age}" />
                         </DataGrid.Columns>
                     </DataGrid>
+                </Grid>
+            </TabItem>
 
-                    <!--<ListView  Grid.Row="1" BorderBrush="White"
-                   ItemsSource="{Binding Path=Entites}"  SelectedItem="{Binding SelectedItem}"
-                   HorizontalAlignment="Stretch" Grid.ColumnSpan="2">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Id"                                
-                                    DisplayMemberBinding="{Binding Path=Entites.Id}" />
-                                <GridViewColumn Header="GuestName"                                
-                                    DisplayMemberBinding="{Binding Path=Entites.GuestName}" />
-                                <GridViewColumn Header="GuestAge"                                    
-                                    DisplayMemberBinding="{Binding Path=Entites.GuestAge}" />
+            <TabItem DataContext="{Binding Children[1]}" x:Name="Hotel" Header="Hotel" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="129*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                            </GridView>
-                        </ListView.View>
-                    </ListView >-->
+                    <Grid Grid.Row="0" HorizontalAlignment="Right" Margin="0,6,20,12" VerticalAlignment="Center" Grid.Column="1">
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="buttonCreateHotel"
+                            Content="Create Hotel"
+                            Command="{Binding ShowCreateEntityCommand}">
+                            </Button>
+                            <Button x:Name="buttonDeleteHotel" Margin="10,0,10,0"
+                            Content="Delete Hotel"
+                            Command="{Binding DeleteEntityCommand}">
+                            </Button>
+                            <Button x:Name="buttonUpdateHotel"
+                            Content="Update Hotel"
+                            Command="{Binding ShowUpdateEntityCommand}">
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+
+                    <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Entities}"
+                        AutoGenerateColumns="False" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id"  Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="HotelName" Binding="{Binding HotelName}" />
+                            <DataGridTextColumn Header="HotelCity" Binding="{Binding HotelCity}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem DataContext="{Binding Children[2]}" x:Name="Room" Header="Room" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="129*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" HorizontalAlignment="Right" Margin="0,6,20,12" VerticalAlignment="Center" Grid.Column="1">
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="buttonCreateRoom"
+                            Content="Create Room"
+                            Command="{Binding ShowCreateEntityCommand}">
+                            </Button>
+                            <Button x:Name="buttonDeleteRoom" Margin="10,0,10,0"
+                            Content="Delete Room"
+                            Command="{Binding DeleteEntityCommand}">
+                            </Button>
+                            <Button x:Name="buttonUpdateRoom"
+                            Content="Update Room"
+                            Command="{Binding ShowUpdateEntityCommand}">
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+
+                    <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Entities}"
+                        AutoGenerateColumns="False" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id"  Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="RoomNumber" Binding="{Binding RoomNumber}" />
+                            <DataGridTextColumn Header="RoomType" Binding="{Binding RoomType}" />
+                            <DataGridTextColumn Header="HotelOwner" Binding="{Binding HotelOwner.Id}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <TabItem DataContext="{Binding Children[3]}" x:Name="HotelJournal" Header="HotelJournal" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="129*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" HorizontalAlignment="Right" Margin="0,6,20,12" VerticalAlignment="Center" Grid.Column="1">
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="buttonCreateHotelJournal"
+                            Content="Create Record"
+                            Command="{Binding ShowCreateEntityCommand}">
+                            </Button>
+                            <Button x:Name="buttonDeleteHotelJournal" Margin="10,0,10,0"
+                            Content="Delete Record"
+                            Command="{Binding DeleteEntityCommand}">
+                            </Button>
+                            <Button x:Name="buttonUpdateHotelJournal"
+                            Content="Update Record"
+                            Command="{Binding ShowUpdateEntityCommand}">
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+
+                    <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding Path=Entities}"
+                        AutoGenerateColumns="False" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id"  Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="RoomId" Binding="{Binding Room.Id}" />
+                            <DataGridTextColumn Header="GuestId" Binding="{Binding Guest.Id}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <!--<TabItem DataContext="{Binding Children[1]}" x:Name="Tab2" Header="Tab2" >

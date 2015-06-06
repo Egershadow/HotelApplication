@@ -11,5 +11,9 @@ namespace Entity.Entity
         public virtual string GuestName { get; set; }
         public virtual IList<HotelJournal> HotelJournals { get; set; }
         public virtual int Age { get; set; }
+        public override string ToString()
+        {
+            return GuestName;
+        }
     }
 }

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\HotelClient\App.xaml
-21764907244
+5608540478
 
-121292498207
+21-284415672
 16-1534272134
-View\CreateUpdateGuestWindow.xaml;View\MainWindow.xaml;
+View\CreateUpdateGuestWindow.xaml;View\CreateUpdateHotelJournalWindow.xaml;View\CreateUpdateHotelWindow.xaml;View\CreateUpdateRoomWindow.xaml;View\MainWindow.xaml;
 
 False
 

@@ -9,8 +9,8 @@ namespace Mapping
         {
             Id(x => x.Id).GeneratedBy.Identity().Not.Nullable();
             Map(x => x.date);
-            References(c => c.Guest);
-            References(c => c.Room);
+            References(c => c.Guest).Not.LazyLoad();
+            References(c => c.Room).Not.LazyLoad();
         }
     }
 }

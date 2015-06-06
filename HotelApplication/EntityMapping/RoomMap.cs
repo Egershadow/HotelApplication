@@ -10,7 +10,7 @@ namespace Mapping
             Id(x => x.Id).GeneratedBy.Identity().Not.Nullable();
             Map(x => x.RoomNumber);
             Map(x => x.RoomType);
-            References(c => c.HotelOwner);
+            References(c => c.HotelOwner).Not.LazyLoad();
         }
     }
 }

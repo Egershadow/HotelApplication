@@ -1,0 +1,4 @@
+C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\Entity\bin\Debug\Entity.dll
+C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\Entity\bin\Debug\Entity.pdb
+C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\Entity\obj\Debug\Entity.dll
+C:\Users\Vadim\Documents\Visual Studio 2013\Projects\HotelApplication\Entity\obj\Debug\Entity.pdb

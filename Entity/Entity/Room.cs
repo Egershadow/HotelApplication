@@ -12,5 +12,9 @@ namespace Entity.Entity
         public virtual string RoomType { get; set; }
         public virtual Hotel HotelOwner { get; set; }
         public virtual IList<HotelJournal> HotelJournals { get; set; }
+        public override string ToString()
+        {
+            return RoomNumber + " " + HotelOwner.HotelName;
+        }
     }
 }

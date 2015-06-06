@@ -21,7 +21,7 @@ namespace HotelApplication.Configuration
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<HotelMap>())
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<HotelJournalMap>())
                 .CurrentSessionContext<WebSessionContext>()
-                .ExposeConfiguration(cfg => new SchemaExport(cfg).Create(true,true))
+                //.ExposeConfiguration(cfg => new SchemaExport(cfg).Create(true,true))
                 .BuildSessionFactory();
         }
     }

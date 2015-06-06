@@ -60,12 +60,30 @@
     <Compile Include="ViewModel\EntityViewModel.cs" />
     <Compile Include="ViewModel\GuestViewModel.cs" />
     <Compile Include="ViewModel\GuestsViewModel.cs" />
+    <Compile Include="ViewModel\HotelJournalsViewModel.cs" />
+    <Compile Include="ViewModel\HotelJournalViewModel.cs" />
+    <Compile Include="ViewModel\HotelsViewModel.cs" />
+    <Compile Include="ViewModel\HotelViewModel.cs" />
+    <Compile Include="ViewModel\RoomsViewModel.cs" />
+    <Compile Include="ViewModel\RoomViewModel.cs" />
     <Compile Include="View\CreateUpdateGuestWindow.xaml.cs">
       <DependentUpon>CreateUpdateGuestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\EnitiesViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="View\CreateUpdateGuestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateUpdateHotelJournalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateUpdateHotelWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateUpdateRoomWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -76,6 +94,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\CreateUpdateHotelJournalWindow.xaml.cs">
+      <DependentUpon>CreateUpdateHotelJournalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateUpdateHotelWindow.xaml.cs">
+      <DependentUpon>CreateUpdateHotelWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateUpdateRoomWindow.xaml.cs">
+      <DependentUpon>CreateUpdateRoomWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

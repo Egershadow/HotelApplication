@@ -1,0 +1,42 @@
+﻿<Window x:Class="HotelClient.View.CreateUpdateHotelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding CreateOrUpdateEntity}" Height="197" Width="300">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="42" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="122*" />
+            <ColumnDefinition Width="296*" />
+        </Grid.ColumnDefinitions>
+        <Label Content="Id" Grid.RowSpan="2" Height="28" HorizontalAlignment="Left" 
+       Name="label1" VerticalAlignment="Top" />
+        <Label Content="HotelName" Grid.Row="1" Grid.RowSpan="2" Height="28" 
+       HorizontalAlignment="Left" Name="label2" 
+       VerticalAlignment="Top" />
+        <Label Content="HotelCity" Grid.Row="2" Grid.RowSpan="2" Height="28" 
+       HorizontalAlignment="Left"
+       Name="label3" VerticalAlignment="Top" />
+
+        <TextBox Grid.Column="1" Grid.RowSpan="2" Height="23" HorizontalAlignment="Left" 
+       Margin="20,5,0,0" Name="IdTextBox" VerticalAlignment="Top" 
+       Width="120" Text="{Binding Path=Entity.Id, Mode=TwoWay}" IsEnabled="False"/>
+
+        <TextBox Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Height="23" 
+       HorizontalAlignment="Left" Margin="20,5,0,0" Name="HotelNameTextBox" 
+       VerticalAlignment="Top" Width="120" Text="{Binding Path=Entity.HotelName, Mode=TwoWay}" />
+
+        <TextBox Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Height="23" 
+       HorizontalAlignment="Left" Margin="20,5,0,0" Name="HotelCityTextBox" 
+       VerticalAlignment="Top" Width="120" Text="{Binding Path=Entity.HotelCity, Mode=TwoWay}" />
+
+        <Button Content="{Binding ButtonName}" Grid.Column="1" Grid.Row="4" Height="23" 
+       HorizontalAlignment="Left" Margin="20,10,0,0" Name="createUpdateHotelButton" 
+       VerticalAlignment="Top" Width="75" Command="{Binding CreateOrUpdateEntity}"/>
+    </Grid>
+</Window>
+

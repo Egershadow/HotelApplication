@@ -17,7 +17,9 @@ namespace HotelClient.ViewModel
         {
             childViews = new ObservableCollection<object>();
             childViews.Add(new GuestsViewModel());
-
+            childViews.Add(new HotelsViewModel());
+            childViews.Add(new RoomsViewModel());
+            childViews.Add(new HotelJournalsViewModel());
         }
 
         

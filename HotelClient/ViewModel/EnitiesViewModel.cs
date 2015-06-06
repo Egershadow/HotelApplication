@@ -138,6 +138,20 @@ namespace HotelClient.ViewModel
             creatorWindow = new ViewCreateUpdateType();
             EntityModelType entityViewModel;
             ConstructorInfo ctor = null;
+            string parameterName = "";
+            ConstructorInfo[] entityConstructorInfos = typeof(EntityType).GetConstructors();
+            foreach (ConstructorInfo info in entityConstructorInfos)
+            {
+                if(info.GetParameters().Length == 0) {
+                    EntityType typo = (EntityType)info.Invoke(null);
+                    parameterName = typo.GetType().Name;
+                    break;
+                }
+            }
+            if (parameterName == "")
+            {
+                return;
+            }
             ConstructorInfo[] constructorInfos = typeof(EntityModelType).GetConstructors();
             for(int i = 0; i < constructorInfos.Length;++i ) 
             {
@@ -148,7 +162,8 @@ namespace HotelClient.ViewModel
                 }
                 else
                 {
-                    if (constructorParams[0].ParameterType.Name.Equals("Guest") && constructorParams.Length == 1)
+
+                    if (constructorParams[0].ParameterType.Name.Equals(parameterName) && constructorParams.Length == 1)
                     {
                         ctor = constructorInfos[i];
                         break;
