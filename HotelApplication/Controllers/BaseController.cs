@@ -26,27 +26,103 @@ namespace HotelApplication.Controllers
         }
 
         // GET: api/Experts/5
-       public ObjType Get(int id)
+       public HttpResponseMessage Get(int id)
         {
-            return dao.GetObjectByID(id);
+            if (id < 0)
+            {
+                var resp = Request.CreateResponse(HttpStatusCode.BadRequest);
+                resp.ReasonPhrase = "Wrong id!";
+                return resp;
+            }
+            else
+            {
+                var result = dao.GetObjectByID(id);
+                if (result == null)
+                {
+                    var resp = Request.CreateResponse(HttpStatusCode.BadRequest);
+                    resp.ReasonPhrase = "Entity with same id not found!";
+                    return resp;
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            
         }
 
         // POST: api/Experts
-       public void Post([FromBody]ObjType value)
+       public HttpResponseMessage Post([FromBody]ObjType value)
         {
-            dao.Create(value);
+            bool failed = false;
+            int id = value.Id;
+            try
+            {
+                dao.Create(value);
+                if (dao.GetObjectByID(id) == null)
+                {
+                    failed = true;
+                }
+            }
+            catch (Exception e)
+            {
+                failed = true;
+            }
+
+            if (failed)
+            {
+                var resp = Request.CreateResponse(HttpStatusCode.BadRequest);
+                resp.ReasonPhrase = "Creating of entity failed!";
+                return resp;
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
         }
 
         // PUT: api/Experts/5
-       public void Put(int id, [FromBody]ObjType value)
+       public HttpResponseMessage Put(int id, [FromBody]ObjType value)
         {
-            dao.Update(id, value);
+            if (id < 0)
+            {
+                var message = "Wrong id!";
+                HttpError err = new HttpError(message);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, err);
+            }
+            else
+            {
+                var result = dao.GetObjectByID(id);
+                if (result == null)
+                {
+                    var resp = Request.CreateResponse(HttpStatusCode.BadRequest);
+                    resp.ReasonPhrase = "Entity with same id not found!";
+                    return resp;
+                }
+                dao.Update(id, value);
+                return Request.CreateResponse(HttpStatusCode.OK, result);   
+            }       
         }
 
         // DELETE: api/Experts/5
-        public void Delete(int id)
+       public HttpResponseMessage Delete(int id)
         {
-            dao.Delete(id);
+            if (id < 0)
+            {
+                var resp = Request.CreateResponse(HttpStatusCode.BadRequest);
+                resp.ReasonPhrase = "Wrong id!";
+                return resp;
+            }
+            else
+            {
+                var result = dao.GetObjectByID(id);
+                if (result == null)
+                {
+                    var resp = Request.CreateResponse(HttpStatusCode.BadRequest);
+                    resp.ReasonPhrase = "Entity with same id not found!";
+                    return resp;
+                }
+                dao.Delete(id);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            } 
+            
         }
     }
 }
