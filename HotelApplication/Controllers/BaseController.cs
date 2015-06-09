@@ -56,7 +56,7 @@ namespace HotelApplication.Controllers
             try
             {
                 dao.Create(value);
-                if (dao.GetObjectByID(id) == null)
+                if (dao.GetObjectByID(id) != null)
                 {
                     failed = true;
                 }

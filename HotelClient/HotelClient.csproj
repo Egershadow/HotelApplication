@@ -56,7 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\EntitiesModel.cs" />
+    <Compile Include="Service\DialogService.cs" />
+    <Compile Include="Service\EntitiesService.cs" />
+    <Compile Include="Service\IDialogService.cs" />
     <Compile Include="ViewModel\EntityViewModel.cs" />
     <Compile Include="ViewModel\GuestViewModel.cs" />
     <Compile Include="ViewModel\GuestsViewModel.cs" />

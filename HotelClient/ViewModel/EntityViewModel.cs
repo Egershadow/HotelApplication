@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace HotelClient.ViewModel
 {
-    public abstract class EntityViewModel <EntityType> where EntityType: IBaseEntity
+    public abstract class EntityViewModel <EntityType> where EntityType: IBaseEntity , new()
     {
         private ICommand createOrUpdateEntity;
 
@@ -20,19 +20,7 @@ namespace HotelClient.ViewModel
         {
             this.Entity = entity;
             if(Entity == null || Entity.Id == 0) {
-
-                ConstructorInfo ctor = null;
-                ConstructorInfo[] constructorInfos = typeof(EntityType).GetConstructors();
-                for (int i = 0; i < constructorInfos.Length; ++i)
-                {
-                    ParameterInfo[] constructorParams = constructorInfos[i].GetParameters();
-                    if (constructorParams.Length == 0)
-                    {
-                        ctor = constructorInfos[i];
-                    }                 
-                }
-
-                Entity = (EntityType)ctor.Invoke(null);
+                Entity = new EntityType();
                 createOrUpdateEntity = new RelayCommand(createEntity, param => canExecuteCreate());
             }
             else
@@ -42,7 +30,6 @@ namespace HotelClient.ViewModel
             
         }
         public EntityType Entity { get;set; }
-        public Window View { get; set; }
         public ICommand CreateOrUpdateEntity
         {
             get
@@ -68,7 +55,7 @@ namespace HotelClient.ViewModel
                 }
             }
         }
-        //public EntitiesModel<EntityType> AllEntitiesModel { get; set; }
+     
         public abstract void createEntity(object obj);
         public abstract void updateEntity(object obj);
         public abstract bool canExecuteCreate();

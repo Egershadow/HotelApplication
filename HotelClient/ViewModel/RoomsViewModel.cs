@@ -1,4 +1,5 @@
 ﻿using Entity.Entity;
+using HotelClient.Service;
 using HotelClient.View;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HotelClient.ViewModel
 {
-    public class RoomsViewModel : EntitiesViewModel<Room, CreateUpdateRoomWindow, RoomViewModel>
+    public class RoomsViewModel : EntitiesViewModel<Room, DialogService, RoomViewModel>
     {
         public RoomsViewModel()
         {

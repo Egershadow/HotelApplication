@@ -11,12 +11,13 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
 using System.Reflection;
+using HotelClient.Service;
 
 namespace HotelClient.ViewModel
 {
-    public class EntitiesViewModel<EntityType, ViewCreateUpdateType, EntityModelType> : ViewModelBase
-        where EntityType : BaseEntity
-        where ViewCreateUpdateType : Window, new()
+    public class EntitiesViewModel<EntityType,DialogService,EntityModelType> : ViewModelBase
+        where EntityType : BaseEntity, new()
+        where DialogService : HotelClient.Service.IDialogService, new()
         where EntityModelType : EntityViewModel <EntityType>,new()
     {
         private ICommand showCreateEntityCommand;
@@ -25,9 +26,9 @@ namespace HotelClient.ViewModel
         private ICommand updateEntityListCommand;
 
         private bool canUpdateEntityListCommand = true;
-        //private GuestWindow guestWindow;
-        private ViewCreateUpdateType creatorWindow;
-        private EntitiesModel<EntityType> entities;
+        private HotelClient.Service.IDialogService dialogService;
+        private ObservableCollection<EntityType> entities;
+        
         private EntityType selectedItem;
         protected String entityAddress = "";
 
@@ -93,7 +94,7 @@ namespace HotelClient.ViewModel
             }
         }
 
-        public EntitiesModel<EntityType> Entities
+        public ObservableCollection<EntityType> Entities
         {
             get
             {
@@ -105,26 +106,13 @@ namespace HotelClient.ViewModel
             }
         }
 
+        public EntitiesService<EntityType> EntityService { get; set; }
 
         public EntitiesViewModel()
         {
-            //Type objType = obj.GetType();
-            //if (objType.ToString() != entity.GetType().ToString())
-            //{
-            //    Exception e = new Exception("EntityService.CopyAllFieldsFrom type mismatch");
-            //    throw e;
-            //}
-            //PropertyInfo[] properties = objType.GetProperties();
-            //foreach (PropertyInfo property in properties)
-            //{
-            //    PropertyInfo entityProperty = entity.GetType().GetProperty(property.Name);
-            //    property.SetValue(obj, entityProperty.GetValue(entity, null));
-            //}
 
-
-            creatorWindow = null;
-            entities = new EntitiesModel<EntityType>();
-            //updateEntityList(new Object());
+            EntityService = new EntitiesService<EntityType>();
+            entities = new ObservableCollection<EntityType>();
 
             showCreateEntityCommand = new RelayCommand(showCreateUpdateWindow, param => this.canShowCreateWindow());
             showUpdateEntityCommand = new RelayCommand(showCreateUpdateWindow, param => this.canShowUpdateWindow());
@@ -135,7 +123,7 @@ namespace HotelClient.ViewModel
 
         public void showCreateUpdateWindow(object obj) 
         {
-            creatorWindow = new ViewCreateUpdateType();
+            dialogService = (HotelClient.Service.IDialogService)new DialogService();
             EntityModelType entityViewModel;
             ConstructorInfo ctor = null;
             string parameterName = "";
@@ -162,7 +150,6 @@ namespace HotelClient.ViewModel
                 }
                 else
                 {
-
                     if (constructorParams[0].ParameterType.Name.Equals(parameterName) && constructorParams.Length == 1)
                     {
                         ctor = constructorInfos[i];
@@ -173,45 +160,27 @@ namespace HotelClient.ViewModel
             if(ctor == null) {
                 return;
             } 
-            //= new EntityModelType(selectedItem);
             entityViewModel = (EntityModelType)ctor.Invoke(new object[] { selectedItem });
-            entityViewModel.View = creatorWindow;
-            creatorWindow.DataContext = entityViewModel;
-            creatorWindow.ShowDialog();
+            dialogService.ShowDialog(entityViewModel);
             updateEntityList(null);
-            
-            //guestWindow = new GuestWindow();
-            //guestWindow.Show();
             
         }
 
-        //public void showUpdateWindow(object obj)
-        //{
-        //    creatorWindow = new ViewCreateUpdateType();
-        //    EntityModelType entityModel = new EntityModelType();
-        //    creatorWindow.DataContext = entityModel;
-        //    creatorWindow.Show();
-        //    //guestWindow = new GuestWindow();
-        //    //guestWindow.Show();
-        //}
-
         public void deleteEntity(object obj)
         {
-            entities.DeleteEntity((EntityType)SelectedItem, entityAddress);
+            EntityService.DeleteEntity((EntityType)SelectedItem, entityAddress);
             updateEntityList(null);
         }
 
         public void updateEntityList(object obj)
         {
             Entities.Clear();
-            EntitiesModel<EntityType> eM = new EntitiesModel<EntityType>();
+            EntitiesService<EntityType> eM = new EntitiesService<EntityType>();
             var rawEntities = new ObservableCollection<EntityType>(eM.GetAllEntities(entityAddress));
             foreach (EntityType rawEntity in rawEntities)
             {
                 Entities.Add(rawEntity);
             }
-            //TODO: set gotten list to EntitiesModel
-            //entities = entities.GetAllEntities(entityAddress);
         }
 
         public bool canShowCreateWindow()

@@ -21,12 +21,12 @@ namespace HotelClient.ViewModel
         }
         public override void createEntity(object obj) 
         {
-            EntitiesModel<Guest> model = new EntitiesModel<Guest>();
+            EntitiesService<Guest> model = new EntitiesService<Guest>();
             model.AddEntity(Entity, "api/guest");
         }
         public override void updateEntity(object obj)
         {
-            EntitiesModel<Guest> model = new EntitiesModel<Guest>();
+            EntitiesService<Guest> model = new EntitiesService<Guest>();
             model.UpdateEntity(Entity, "api/guest" + "/" + Entity.Id);
         }
 

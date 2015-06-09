@@ -12,6 +12,9 @@ namespace HotelClient.ViewModel
 {
     public class HotelJournalViewModel : EntityViewModel<HotelJournal>
     {
+        private EntitiesService<Room> roomsService;
+        private EntitiesService<Guest> guestsService;
+
         public HotelJournalViewModel()
             : base(new HotelJournal())
         {
@@ -31,12 +34,12 @@ namespace HotelClient.ViewModel
 
         }
 
-        private EntitiesModel<Guest> guests;
+        private ObservableCollection<Guest> guests;
 
-        private EntitiesModel<Room> rooms;
-        public EntitiesModel<HotelJournal> HotelJournals { get; set; }
+        private ObservableCollection<Room> rooms;
+        public EntitiesService<HotelJournal> HotelJournals { get; set; }
 
-        public EntitiesModel<Guest> Guests
+        public ObservableCollection<Guest> Guests
         {
             get
             {
@@ -48,7 +51,7 @@ namespace HotelClient.ViewModel
             }
         }
 
-        public EntitiesModel<Room> Rooms
+        public ObservableCollection<Room> Rooms
         {
             get
             {
@@ -65,14 +68,14 @@ namespace HotelClient.ViewModel
         public Guest SelectedGuest { get; set; }
         public override void createEntity(object obj)
         {
-            EntitiesModel<HotelJournal> model = new EntitiesModel<HotelJournal>();
+            EntitiesService<HotelJournal> model = new EntitiesService<HotelJournal>();
             Entity.Room = SelectedRoom;
             Entity.Guest = SelectedGuest;
             model.AddEntity(Entity, "api/hoteljournal");
         }
         public override void updateEntity(object obj)
         {
-            EntitiesModel<HotelJournal> model = new EntitiesModel<HotelJournal>();
+            EntitiesService<HotelJournal> model = new EntitiesService<HotelJournal>();
             Entity.Room = SelectedRoom;
             Entity.Guest = SelectedGuest;
             model.UpdateEntity(Entity, "api/hoteljournal" + "/" + Entity.Id);
@@ -89,22 +92,22 @@ namespace HotelClient.ViewModel
 
         private void _updateRoomsList(object obj)
         {
-            _updateList(ref rooms, "api/room");
+            _updateList(ref rooms, ref roomsService, "api/room");
         }
 
         private void _updateGuestsList(object obj)
         {
-            _updateList(ref guests, "api/guest");
+            _updateList(ref guests, ref guestsService, "api/guest");
         }
 
-        private void _updateList<Entity>(ref EntitiesModel<Entity> model, string address) where Entity : BaseEntity
+        private void _updateList<Entity>(ref ObservableCollection<Entity> model, ref EntitiesService<Entity> service, string address) where Entity : BaseEntity
         {
             if (model == null)
             {
-                model = new EntitiesModel<Entity>();
+                model = new ObservableCollection<Entity>();
             }
             model.Clear();
-            var rawEntities = new ObservableCollection<Entity>(model.GetAllEntities(address));
+            var rawEntities = new ObservableCollection<Entity>(service.GetAllEntities(address));
             foreach (Entity rawEntity in rawEntities)
             {
                 model.Add(rawEntity);

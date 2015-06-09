@@ -7,10 +7,11 @@ using Entity.Entity;
 using HotelClient.View;
 using HotelClient.Model;
 using System.Collections.ObjectModel;
+using HotelClient.Service;
 
 namespace HotelClient.ViewModel
 {
-    public class GuestsViewModel : EntitiesViewModel<Guest, CreateUpdateGuestWindow,GuestViewModel>
+    public class GuestsViewModel : EntitiesViewModel<Guest,DialogService,GuestViewModel>
     {
         public GuestsViewModel()
         {
